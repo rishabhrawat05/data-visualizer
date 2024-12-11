@@ -10,7 +10,7 @@ const Charts = ({ data }) => {
         if (chartInstance.current) {
             chartInstance.current.destroy();
         }
-
+        const title = data.data.map((item) => Object.keys(item)[1]);
         const labels = data.data.map((item) => Object.values(item)[2]);
         const values = data.data.map((item) => parseFloat(Object.values(item)[1]));
 
@@ -22,7 +22,7 @@ const Charts = ({ data }) => {
                 labels: labels,
                 datasets: [
                     {
-                        label: `Sales`,
+                        label: `${title[1]}`,
                         data: values,
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -64,6 +64,7 @@ const Charts = ({ data }) => {
         return () => {
             if (chartInstance.current) {
                 chartInstance.current.destroy();
+                
             }
         };
     }, [data]);
